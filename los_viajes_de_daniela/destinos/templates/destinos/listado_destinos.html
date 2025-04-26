@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los viajes de Daniela - Destinos</title>
+</head>
+<body>
+    <h1>Mis viajes por Europa</h1>
+
+    {% if destinos %}
+        <ul>
+            {% for destino in destinos %}
+                <li>
+                    <h2>{{ destino.titulo }}</h2>
+                    <p>{{ destino.pais }}</p>
+                    <img src="{{ destino.imagen.url }}" alt="{{ destino.titulo }}" style="width: 200px;">
+                    <p>{{ destino.descripcion|truncatewords:30 }}</p>
+                    <a href="{% url 'detalle_destino' destino.id %}">Leer más</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay destinos aún.</p>
+    {% endif %}
+</body>
+</html>
