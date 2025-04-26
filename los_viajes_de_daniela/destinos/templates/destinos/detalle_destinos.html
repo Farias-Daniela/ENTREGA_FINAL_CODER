@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ destino.titulo }}</title>
+</head>
+<body>
+    <h1>{{ destino.titulo }}</h1>
+    <p><strong>País:</strong> {{ destino.pais }}</p>
+    <p>{{ destino.descripcion }}</p>
+    <img src="{{ destino.imagen.url }}" alt="{{ destino.titulo }}">
+    <a href="{% url 'listado_destinos' %}">Volver al listado</a>
+</body>
+</html>

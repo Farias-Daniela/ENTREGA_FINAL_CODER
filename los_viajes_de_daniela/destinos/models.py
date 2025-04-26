@@ -1,12 +1,12 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django.utils import timezone
 
 class Destino(models.Model):
-    titulo = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=200)
     pais = models.CharField(max_length=100)
-    descripcion = RichTextField()
+    descripcion = models.TextField()
     imagen = models.ImageField(upload_to='destinos/')
-    fecha = models.DateField()
+    fecha = models.DateField(default=timezone.now, null=True, blank=True)  # Permite NULL y tiene valor por defecto
 
     def __str__(self):
-        return f"{self.titulo} - {self.pais}"
+        return self.titulo

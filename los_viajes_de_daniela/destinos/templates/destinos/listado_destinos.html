@@ -3,25 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Los viajes de Daniela - Destinos</title>
+    <title>Mis Destinos - Blog de Viajes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #d500f9;  /* Fucsia vibrante */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .destino-lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .destino {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .destino:hover {
+            transform: scale(1.05);
+        }
+
+        .destino img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid #d500f9;
+        }
+
+        .destino-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .destino-info h2 {
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .destino-info p {
+            font-size: 1rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .leer-mas {
+            background-color: #d500f9;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .leer-mas:hover {
+            background-color: #aa00cc;
+        }
+
+        footer {
+            background-color: #d500f9;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Mis viajes por Europa</h1>
 
-    {% if destinos %}
-        <ul>
-            {% for destino in destinos %}
-                <li>
-                    <h2>{{ destino.titulo }}</h2>
-                    <p>{{ destino.pais }}</p>
-                    <img src="{{ destino.imagen.url }}" alt="{{ destino.titulo }}" style="width: 200px;">
-                    <p>{{ destino.descripcion|truncatewords:30 }}</p>
-                    <a href="{% url 'detalle_destino' destino.id %}">Leer más</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay destinos aún.</p>
-    {% endif %}
+    <header>
+        <h1>Mis Viajes por Europa</h1>
+        <p>Explora los mejores destinos turísticos del continente</p>
+    </header>
+
+    <div class="container">
+        <div class="destino-lista">
+            {% if destinos %}
+                {% for destino in destinos %}
+                    <div class="destino">
+                        <img src="{{ destino.imagen.url }}" alt="{{ destino.titulo }}">
+                        <div class="destino-info">
+                            <h2>{{ destino.titulo }}</h2>
+                            <p>{{ destino.pais }}</p>
+                            <p>{{ destino.descripcion|truncatewords:30 }}</p>
+                            <a href="{% url 'listado_destinos' destino.id %}" class="leer-mas">Leer más</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay destinos aún.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Mis Viajes - Todos los derechos reservados</p>
+    </footer>
+
 </body>
 </html>
